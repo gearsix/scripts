@@ -1,10 +1,12 @@
 #!/bin/bash
-# ~/scripts
+# shh
 # run a terminal command and send stdout to /dev/null
 #
 # shh cmd
 # 
-# @TODO add autocomplete
+# @TODO autocomplete for $PATH files?
 
-$@ &>/dev/null &
+for bin in $@; do
+    $bin &>/dev/null &
+done;
 
