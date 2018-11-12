@@ -1,13 +1,11 @@
 #!/bin/bash
-# ~/scripts
+# xdg-open
 # open file in xserver (doesn't support multiple files at once)
 #
 # xopen file [-shh, -shhh]
 # -shh, -shhh   # send stdout to /dev/null
 # 
 # $lazymode=xo
-#
-# @TODO add autocomplete
 
 for last_arg; do true; done;
 # check for shhh

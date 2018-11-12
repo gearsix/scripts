@@ -1,7 +1,8 @@
 #!/bin/bash
-# ~/scripts
+# mkdcp (mkdir&cp)
 # make a directory and copy files into it
-# e.g.$ mkdcp ~/new-dir ~/var/tmp/file1 ~/var/tmp/file2 ...
+#
+# e.g.$ mkdcp ~/new-dir /tmp/file*
 
 #mkdir $1
 dir=$1;

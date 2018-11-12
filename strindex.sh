@@ -1,7 +1,8 @@
 #!/bin/bash
-# ~/scripts
+# strindex (string index)
 # finds the starting index of a substring in a string
 # index returned ranges from 0 - (string length)
+#
 # e.g.$ strindex "cat" "the cat sat on the mat"   #returns 4
 
 #swaps argument (strindex "cat on mat" "mat")

@@ -1,7 +1,10 @@
 #!/bin/bash
-# ~/scripts
+# strlen (string length)
 # echo's the length of a string
-# e.g.$ strlen "my di-"
+#
+# e.g.$ strlen "ma di-"
+#
+# SEE: https://stackoverflow.com/questions/17368067/length-of-string-in-bash
 
 strU8DiffLen () { 
     local bytlen oLang=$LANG oLcAll=$LC_ALL
@@ -17,6 +20,3 @@ for string in $1; do
         "'$string'" ${#string} $((${#string}+$?))
 done 
 
-#string=$1
-#length=${#string}
-#echo "$length"

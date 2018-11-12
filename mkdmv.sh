@@ -1,6 +1,7 @@
 #!/bin/bash
-# ~/scripts
+# mkdmv (mkdir&mv) 
 # make directory $1 and move files ($2...$n) into it
+#
 # e.g.$ mkdmv ~/new-dir ~/var/tmp/file*
 
 #mkdir $1
