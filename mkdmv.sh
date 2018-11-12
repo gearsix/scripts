@@ -1,14 +1,14 @@
 #!/bin/bash
 # ~/scripts
-# make a directory and move files into it
-# e.g.$ mkdmv ~/new-dir ~/var/tmp/file1 ~/var/tmp/file2 ...
+# make directory $1 and move files ($2...$n) into it
+# e.g.$ mkdmv ~/new-dir ~/var/tmp/file*
 
 #mkdir $1
 dir=$1;
 mkdir -p $dir
 shift;
 
-#cp files into $1
+#cp files ($2...$n) into $1
 for file in $@; do
     mv $file $dir;
     shift;
