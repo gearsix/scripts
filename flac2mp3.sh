@@ -1,7 +1,8 @@
 #!/bin/bash
 # ~/scripts/flac2mp3.sh
 # converts .flac to .mp3
-# DEPENDENCIES: requires ffmpeg
+# DEPENDENCIES: ffmpeg
+#
 # e.g.$ flac2mp3 ./album
 
 for file in $1/*.flac; do
