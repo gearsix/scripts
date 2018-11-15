@@ -1,7 +1,7 @@
 # bash-scripts
 A small collection of personal Bash scripts. I usually mkdir a ~/bin folder (usually in $PATH by default) and ln -s for all the scripts I wanna use.
 
-Most of these are for convenience.
+Most of these are for convenience. I've got a few more coming that are currently sitting in my .bashrc.
 
 If any of them are do-able with a simple single-line of Bash, let me know!
 
