@@ -36,7 +36,7 @@ Personally, I like to `mkdir` a ~/bin folder (make sure ~/bin is in $PATH) and l
 ### strings
 Scripts related to string parsing/manipulation
 
-- **strlen** - prints the length of string ($1)
+- **strlen** - prints the length of passed strings ($')
 - **strindex** - prints the index (starting from 0) of the first character in substring ($1)
 - **gfind** - find all files in dir ($1), that conatin string ($2) - SUPER useful for debugging somebody else's code
 
@@ -46,12 +46,17 @@ Scripts related to string parsing/manipulation
 - **flac2mp3** - converts .flac files ($1..$n) to .mp3 files
 - **cpc** - copy the contents of file $1 into file $2 **WARNING: will overwrite contents of file $2**
 - **xopen** - open files ($@) in their xdg-default
-  - ```-q``` ```--quiet``` - sends the output of $@ to /dev/null
+  - _-q_ _--quiet_ - sends the output of $@ to /dev/null
 - **openurl** - open a .url file ($1) (see http://www.danielbrice.net/blog/opening-url-file-like-a-pro/)
   - I never use this one directly myself, instead I set it as the default binary for .url files in ~/.config/mimeapps.list and use xopen
 - **mkdcp** - make directory ($1) and copy files into it ($2..$n)
 - **mkdmv** - make directory ($1) and move files into it ($2..$n)
 - **mkdnvim** - make directory ($1), touch file ($2) and open file ($2) in nvim
+
+### tooling
+
+- **git-cfg** - shorthand for setting git config --local user.name ($1) && git config --local user.email ($2)
+  - You can also use it for setting global config, just add _-g_ or _--global_ at $3
 
 ### misc
 
