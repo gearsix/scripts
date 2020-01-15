@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # strlen (string length)
 # description: echo's the length of a string ($1)
 # e.g.$ strlen "ma di-"
@@ -13,9 +13,9 @@ strU8DiffLen () {
     return $(( bytlen - ${#1} ))
 }
 
-for string in $1; do
+for string in $@; do
     strU8DiffLen "$string"
-    printf " - %-$((14+$?))s is %2d chars length, but use %2d bytes\n" \
+    printf "%-$((14+$?))s is %2d chars length and uses %2d bytes\n" \
         "'$string'" ${#string} $((${#string}+$?))
 done 
 

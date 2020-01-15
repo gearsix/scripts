@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # mkdcp (mkdir&cp)
 # description: make a directory and copy files into it
 # e.g.$ mkdcp ~/new-dir /tmp/file*

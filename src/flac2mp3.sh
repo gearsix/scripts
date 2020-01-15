@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # flac2mp3
 # description: converts .flac files ($1...$n) to .mp3 files
 # e.g.$ flac2mp3 ./album

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # openurl
 # description: script for opening .url filetype
 # e.g.$ openurl link.url

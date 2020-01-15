@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # mkdmv (mkdir & mv) 
 # description: mkdir $1 && mv ($2...$n) 1to it
 # e.g.$ mkdmv ~/new-dir ~/var/tmp/file*

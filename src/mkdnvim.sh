@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # mkdnvim (mkdir&nvim)
 # description: makes directory $1 and opens file $2 using nvim
 # e.g.$ mkdnvim ~/new file      #creates ~/new/file and nvim into it

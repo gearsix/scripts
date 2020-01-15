@@ -1,6 +1,6 @@
 # DEPRECIATED: found out you could just use "touch ./file{0..13}"
 
-#!/bin/bash
+#!/bin/sh
 # ~/scripts
 # description: create $2 files name $1 appended with 1 to $2
 # e.g$ touchn "song" 13      # creates song1...song13 in curr_dir

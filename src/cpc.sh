@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # cpc (cp contents)
 # description: copies the contents of file $1 to file $2
 #

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # strindex (string index)
 # description: finds the starting index of substring ($1) in a string ($2)
 # e.g.$ strindex "cat" "the cat sat on the mat"   #returns 4
