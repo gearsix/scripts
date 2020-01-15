@@ -55,6 +55,10 @@ Scripts related to string parsing/manipulation
 - mkdmv = make directory ($1) and move files into it ($2..$n)
 - mkdnvim = make directory ($1), touch file ($2) and open file ($2) in nvim
 
+### misc
+
+- while-true = clear the terminal, run $1 sleep ($2 || 1), repeat forever (Ctrl+C to cancel)
+
 ### depreciated
 
 - touchn = create $2 files name $1 appended with 1 to $2
