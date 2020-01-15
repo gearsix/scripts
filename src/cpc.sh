@@ -1,6 +1,6 @@
 #!/bin/bash
 # cpc (cp contents)
-# copies the contents of file $1 to file $2
+# description: copies the contents of file $1 to file $2
 #
 # e.g.$ cpc file1.txt file2.txt
 

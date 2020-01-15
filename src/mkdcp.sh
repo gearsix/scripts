@@ -1,7 +1,6 @@
 #!/bin/bash
 # mkdcp (mkdir&cp)
-# make a directory and copy files into it
-#
+# description: make a directory and copy files into it
 # e.g.$ mkdcp ~/new-dir /tmp/file*
 
 #mkdir $1

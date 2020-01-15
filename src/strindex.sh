@@ -1,9 +1,9 @@
 #!/bin/bash
 # strindex (string index)
-# finds the starting index of a substring in a string
-# index returned ranges from 0 - (string length)
-#
+# description: finds the starting index of substring ($1) in a string ($2)
 # e.g.$ strindex "cat" "the cat sat on the mat"   #returns 4
+#
+# NOTES: index returned ranges from 0 - (string length)
 
 #swaps argument (strindex "cat on mat" "mat")
 if [[ -z $3 && $3 == "-r" ]]; then

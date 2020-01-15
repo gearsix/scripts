@@ -1,7 +1,6 @@
 #!/bin/bash
 # strlen (string length)
-# echo's the length of a string
-#
+# description: echo's the length of a string ($1)
 # e.g.$ strlen "ma di-"
 #
 # SEE: https://stackoverflow.com/questions/17368067/length-of-string-in-bash

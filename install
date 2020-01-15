@@ -1,0 +1,134 @@
+#!/bin/bash
+#===========
+# g6scripts
+#===========
+# file: install
+# created: 2020-01-15
+# updated: 2020-01-16
+# description: loops through files in ./src & installs them to configured destination
+
+#---------
+# GLOBALS
+#---------
+ln=0
+dir=0
+all=0
+destination=/usr/bin	# default install directory
+source=./src/*.sh
+depreciated_src=./src/depreciated/*.sh
+
+#-----------
+# FUNCTIONS
+#-----------
+## print_help = prints the help dialog and exits
+print_help () {
+	echo "usage: ./install [ARGUMENTS]"
+	echo ""
+	echo "ARGUMENTS"
+	echo "-d, --dest    pre-define the destination to install the scripts to"
+	echo "-a, --all     install ALL the scripts, will answer \"y\" automatically"
+	echo "-l, --link    will \"ln -s\" the script (not copy it), note if location of source changes then links will break"
+	echo "-h, --help    print this dialog"
+}
+## install_yn = installs $1 to $2, prints $3 if user asks for "info"
+install_yn () {
+	src=$1  # path of the file to install
+	dest=$2 # path to install the file to
+	depr=$3 # if installing a depreciated script or not
+
+	ask=0
+	while [[ ask -eq 0 ]]; do
+		printf "install %s [yes/no/info]? " $src
+		if [[ $all -eq 0 || $depr -eq 1 ]]; then
+			read yn
+		else
+			yn="y"
+			echo "y"
+		fi
+
+		if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
+			if [[ $ln -eq 0 ]]; then
+				echo "install $src -> $dest"
+				install -pDm755 $src $dest
+			else # ln the file
+				echo "ln -s $src -> $dest"
+				chmod +x $src
+				mkdir -p $(dirname $dest)
+				ln -sf $(readlink -f $src) $dest
+			fi
+			ask=1
+		elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
+			echo "skipping..."
+			ask=1
+		elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
+			cat $script | grep "description\|DEPENDENCIES\|ARGUMENTS\|DEPRECIATED"
+		fi
+	done
+}
+
+#------
+# MAIN
+#------
+## parse args
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		-l|--link)
+			ln=1
+			echo "will only create symolic links to scripts, this will make the scripts in ./src/ executable"
+			shift
+			;;
+		-d|--dest)
+			dir=1
+			destination=$2
+			shift
+			shift
+			;;
+		-a|--all)
+			all=1
+			echo "installed ALL scripts (not including depreciated)"
+			shift
+			;;
+		*) # invalid arg found, print help & exit
+			print_help
+			exit
+			;;
+	esac
+done
+echo "==========="
+echo " g6scripts "
+echo "==========="
+echo ""
+echo "installation"
+echo "------------"
+## check install destination
+if [[ dir -eq 0 ]]; then
+	printf "install destination (default = $destination): "
+	read destination
+else
+	echo "install destination = $destination"
+fi
+## install scripts from source
+for script in $source; do
+	if [[ $script != "src/depreciated" ]]; then # skip depreciated
+		install_yn $script ${destination//"~"/$HOME}/$(basename $script .sh)
+	fi
+done
+## install depreciated scripts 
+ask=0
+while [[ ask -eq 0 ]]; do
+	printf "install depreciated scripts (default = no) [yes/no/info]? "
+	read yn
+	if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
+		for script in $depreciated_src; do
+			install_yn $script ${destination//"~"/$HOME}/$(basename $script .sh) 1
+		done
+		ask=1
+	elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
+		ask=1
+	elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
+		echo "depreciated scripts have been found redundant, details are provided in the \"info\" for each script"
+	fi
+done
+## end
+echo "done"
+echo "make sure $destination is in your \$PATH and you should be able to call any of these scripts from the terminal"
