@@ -69,6 +69,9 @@ install_yn () {
 #------
 # MAIN
 #------
+echo "==========="
+echo " g6scripts "
+echo "==========="
 ## parse args
 while [[ $# -gt 0 ]]; do
 	case $1 in
@@ -94,9 +97,6 @@ while [[ $# -gt 0 ]]; do
 			;;
 	esac
 done
-echo "==========="
-echo " g6scripts "
-echo "==========="
 echo ""
 echo "installation"
 echo "------------"
