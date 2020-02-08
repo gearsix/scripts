@@ -6,7 +6,7 @@
 while [ true ]; do
 	clear
 	$1
-	if [[ -e $2 ]]; then
+	if [ $2 ]; then
 		sleep $2
 	else
 		sleep 1
