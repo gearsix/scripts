@@ -25,10 +25,11 @@ print_help () {
 	echo "usage: ./install [ARGUMENTS]"
 	echo ""
 	echo "ARGUMENTS"
-	echo "-d, --dest    pre-define the destination to install the scripts to"
-	echo "-a, --all     install ALL the scripts, will answer \"y\" automatically"
-	echo "-l, --link    will \"ln -s\" the script (not copy it), note if location of source changes then links will break"
-	echo "-h, --help    print this dialog"
+    echo "-r, --reinstall   will automatically re-install all scripts already present in the destination directory"
+	echo "-d, --dest        pre-define the destination to install the scripts to"
+	echo "-a, --all         install ALL the scripts, will answer \"y\" automatically"
+	echo "-l, --link        will \"ln -s\" the script (not copy it), note if location of source changes then links will break"
+	echo "-h, --help        print this dialog"
 }
 ## install_yn = installs $1 to $2, prints $3 if user asks for "info"
 install_yn () {
@@ -83,6 +84,7 @@ while [[ $# -gt 0 ]]; do
 		-d|--dest)
 			dir=1
 			destination=$2
+			echo "install destination = $destination"
 			shift
 			shift
 			;;
@@ -104,12 +106,12 @@ echo "------------"
 if [[ dir -eq 0 ]]; then
 	printf "install destination (default = $destination): "
 	read destination
-else
-	echo "install destination = $destination"
 fi
 ## install scripts from source
 for script in $source; do
-	if [[ $script != "src/depreciated" ]]; then # skip depreciated
+    if [ -e ${destination//"~"/$HOME}/$(basename $script .sh) ]; then
+        printf "${destination//"~"/$HOME}/$(basename $script .sh) already exists, skipping...\n"
+    elif [[ $script != "src/depreciated" ]]; then # skip depreciated
 		install_yn $script ${destination//"~"/$HOME}/$(basename $script .sh)
 	fi
 done
