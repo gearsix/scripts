@@ -13,6 +13,8 @@
 ln=0
 dir=0
 all=0
+force=0
+verbose=0
 destination=/usr/bin	# default install directory
 source=./src/*.sh
 depreciated_src=./src/depreciated/*.sh
@@ -25,11 +27,26 @@ print_help () {
 	echo "usage: ./install [ARGUMENTS]"
 	echo ""
 	echo "ARGUMENTS"
-    echo "-r, --reinstall   will automatically re-install all scripts already present in the destination directory"
-	echo "-d, --dest        pre-define the destination to install the scripts to"
+	echo "-f, --force       overwrites files when installing"
+    echo "-r, --reinstall   will automatically re-install all scripts already present in the destination directory "
+	echo "-d, --dest [DEST] followed by the destination to install the scripts to"
 	echo "-a, --all         install ALL the scripts, will answer \"y\" automatically"
 	echo "-l, --link        will \"ln -s\" the script (not copy it), note if location of source changes then links will break"
 	echo "-h, --help        print this dialog"
+}
+dotfm_install () {
+	src=$1
+	dest=$2
+
+	if [[ $ln -eq 0 ]]; then
+		echo "install $src -> $dest"
+		install -pDm754 $src $dest
+	else # ln the file
+		echo "ln -s $src -> $dest"
+		chmod +x $src
+		mkdir -p $(dirname $dest)
+		ln -sf $(readlink -f $src) $dest
+	fi
 }
 ## install_yn = installs $1 to $2, prints $3 if user asks for "info"
 install_yn () {
@@ -39,30 +56,32 @@ install_yn () {
 
 	ask=0
 	while [[ ask -eq 0 ]]; do
-		printf "install %s [yes/no/info]? " $src
-		if [[ $all -eq 0 || $depr -eq 1 ]]; then
-			read yn
-		else
-			yn="y"
-			echo "y"
-		fi
-
-		if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
-			if [[ $ln -eq 0 ]]; then
-				echo "install $src -> $dest"
-				install -pDm755 $src $dest
-			else # ln the file
-				echo "ln -s $src -> $dest"
-				chmod +x $src
-				mkdir -p $(dirname $dest)
-				ln -sf $(readlink -f $src) $dest
+		if [[ force -eq 0 ]]; then
+			printf "install %s [yes/no/info]? " $src
+			if [[ $all -eq 0 || $depr -eq 1 ]]; then
+				if [[ -e $dest && $reinstall -eq 1 ]]; then
+					yn="y"
+					echo "reinstalling..."
+				else
+					read yn
+				fi
+			else
+				yn="y"
+				echo "y"
 			fi
+
+			if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
+				install $src $dest
+				ask=1
+			elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
+				echo "skipping..."
+				ask=1
+			elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
+				cat $script | grep "description\|DEPENDENCIES\|ARGUMENTS\|DEPRECIATED"
+			fi
+		else 
+			dotfm_install $src $dest
 			ask=1
-		elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
-			echo "skipping..."
-			ask=1
-		elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
-			cat $script | grep "description\|DEPENDENCIES\|ARGUMENTS\|DEPRECIATED"
 		fi
 	done
 }
@@ -70,12 +89,14 @@ install_yn () {
 #------
 # MAIN
 #------
-echo "==========="
-echo " g6scripts "
-echo "==========="
 ## parse args
 while [[ $# -gt 0 ]]; do
 	case $1 in
+		-f|--force)
+			force=1
+			echo "forcing overwrite on existing files"
+			shift
+			;;
 		-l|--link)
 			ln=1
 			echo "will only create symolic links to scripts, this will make the scripts in ./src/ executable"
@@ -93,8 +114,18 @@ while [[ $# -gt 0 ]]; do
 			echo "installed ALL scripts (not including depreciated)"
 			shift
 			;;
-		*) # invalid arg found, print help & exit
+		-r|--reinstall)
+			reinstall=1
+			echo "reinstalling currently existing files"
+			shift
+			;;
+		-h|--help)
 			print_help
+			exit
+			;;
+		*) # invalid arg found, print help & exit
+			echo "error: invalid arg "$1""
+			echo "note: args can't be combined (e.g. -lf), see --help"
 			exit
 			;;
 	esac
@@ -109,7 +140,7 @@ if [[ dir -eq 0 ]]; then
 fi
 ## install scripts from source
 for script in $source; do
-    if [ -e ${destination//"~"/$HOME}/$(basename $script .sh) ]; then
+    if [[ -e ${destination//"~"/$HOME}/$(basename $script .sh) && $force -eq 0 && $reinstall -eq 0 ]]; then
         printf "${destination//"~"/$HOME}/$(basename $script .sh) already exists, skipping...\n"
     elif [[ $script != "src/depreciated" ]]; then # skip depreciated
 		install_yn $script ${destination//"~"/$HOME}/$(basename $script .sh)
