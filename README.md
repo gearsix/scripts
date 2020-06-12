@@ -63,6 +63,7 @@ Scripts related to string parsing/manipulation
 ### misc
 
 - **while-true** - clear the terminal, run $1 sleep ($2 || 1), repeat forever (Ctrl+C to cancel)
+- **preview-md** - convert a markdown file ($1) to html, open if $2 == "-o" or "--open". Uses cmark by default, set conversion tool and default output destination in src.
 
 ### depreciated
 
