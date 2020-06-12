@@ -28,6 +28,8 @@ I've created an install script (_another_ bash script) to help with selecting th
 I'm planning to add an uninstall bash script too, currently you'll have to manually delete all the files added though.
 
 ## notes
+I personally find `gfind` and `while-true` the most useful.
+
 Personally, I like to `mkdir` a ~/bin folder (make sure ~/bin is in $PATH) and ln -s for all the scripts I wanna use (e.g. below):
 
 	./install --link --dest ~/bin
