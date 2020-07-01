@@ -28,6 +28,8 @@ I've created an install script (_another_ bash script) to help with selecting th
 I'm planning to add an uninstall bash script too, currently you'll have to manually delete all the files added though.
 
 ## notes
+I personally find `gfind` and `while-true` the most useful.
+
 Personally, I like to `mkdir` a ~/bin folder (make sure ~/bin is in $PATH) and ln -s for all the scripts I wanna use (e.g. below):
 
 	./install --link --dest ~/bin
@@ -61,6 +63,7 @@ Scripts related to string parsing/manipulation
 ### misc
 
 - **while-true** - clear the terminal, run $1 sleep ($2 || 1), repeat forever (Ctrl+C to cancel)
+- **preview-md** - convert a markdown file ($1) to html, open if $2 == "-o" or "--open". Uses cmark by default, set conversion tool and default output destination in src.
 
 ### depreciated
 

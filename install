@@ -15,7 +15,7 @@ dir=0
 all=0
 force=0
 verbose=0
-destination=/usr/bin	# default install directory
+default_destination=/usr/local/bin/	# default install directory
 source=./src/*.sh
 depreciated_src=./src/depreciated/*.sh
 
@@ -130,13 +130,15 @@ while [[ $# -gt 0 ]]; do
 			;;
 	esac
 done
-echo ""
-echo "installation"
-echo "------------"
+
 ## check install destination
 if [[ dir -eq 0 ]]; then
-	printf "install destination (default = $destination): "
+	printf "install destination (default = $default_destination): "
 	read destination
+	## set to default if empty input
+	if [ -z $destination ]; then destination=$default_destination; fi
+	## check if need root permission to r/w
+	if [ ! -w $destination ]; then echo "$destination: Permission denied"; exit 1; fi
 fi
 ## install scripts from source
 for script in $source; do
