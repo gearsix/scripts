@@ -16,15 +16,21 @@ all=0
 force=0
 verbose=0
 default_destination=/usr/local/bin/	# default install directory
-source=./src/*.sh
-depreciated_src=./src/depreciated/*.sh
+source=./src/*.*
+depreciated_src=./src/depreciated/*.*
+scripts=()
+depreciated=0
 
 #-----------
 # FUNCTIONS
 #-----------
 ## print_help = prints the help dialog and exits
 print_help () {
-	echo "usage: ./install [ARGUMENTS]"
+	echo "usage: ./install [ARGUMENTS] [SCRIPT]"
+	echo ""
+	echo "SCRIPTS"
+	echo "Optionally, you can specify a script to install."
+	echo "Any specified scripts must be the filepath to the script (not just the filename)."
 	echo ""
 	echo "ARGUMENTS"
 	echo "-f, --force       overwrites files when installing"
@@ -34,7 +40,7 @@ print_help () {
 	echo "-l, --link        will \"ln -s\" the script (not copy it), note if location of source changes then links will break"
 	echo "-h, --help        print this dialog"
 }
-dotfm_install () {
+install_script () {
 	src=$1
 	dest=$2
 
@@ -55,8 +61,8 @@ install_yn () {
 	depr=$3 # if installing a depreciated script or not
 
 	ask=0
-	while [[ ask -eq 0 ]]; do
-		if [[ force -eq 0 ]]; then
+	while [[ $ask -eq 0 ]]; do
+		if [[ $force -eq 0 ]]; then
 			printf "install %s [yes/no/info]? " $src
 			if [[ $all -eq 0 || $depr -eq 1 ]]; then
 				if [[ -e $dest && $reinstall -eq 1 ]]; then
@@ -77,10 +83,10 @@ install_yn () {
 				echo "skipping..."
 				ask=1
 			elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
-				cat $script | grep "description\|DEPENDENCIES\|ARGUMENTS\|DEPRECIATED"
+				grep -i "description\|dependencies\|arguments\|depreciated" $script
 			fi
 		else 
-			dotfm_install $src $dest
+			install_script $src $dest
 			ask=1
 		fi
 	done
@@ -123,10 +129,10 @@ while [[ $# -gt 0 ]]; do
 			print_help
 			exit
 			;;
-		*) # invalid arg found, print help & exit
-			echo "error: invalid arg "$1""
-			echo "note: args can't be combined (e.g. -lf), see --help"
-			exit
+		*) # assume it's a specifed script to install
+			scripts+=($1)
+			depreciated=1
+			shift
 			;;
 	esac
 done
@@ -140,17 +146,19 @@ if [[ dir -eq 0 ]]; then
 	## check if need root permission to r/w
 	if [ ! -w $destination ]; then echo "$destination: Permission denied"; exit 1; fi
 fi
-## install scripts from source
-for script in $source; do
-    if [[ -e ${destination//"~"/$HOME}/$(basename $script .sh) && $force -eq 0 && $reinstall -eq 0 ]]; then
-        printf "${destination//"~"/$HOME}/$(basename $script .sh) already exists, skipping...\n"
-    elif [[ $script != "src/depreciated" ]]; then # skip depreciated
+
+## install all $scripts
+if [ ${#scripts[@]} -eq 0 ]; then scripts=$source; fi
+for script in $scripts; do
+	if [[ -e ${destination//"~"/$HOME}/$(basename $script .sh) && $force -eq 0 && $reinstall -eq 0 ]]; then
+		printf "${destination//"~"/$HOME}/$(basename $script .sh) already exists, skipping...\n"
+	elif [[ $script != "src/depreciated" ]]; then # skip depreciated
 		install_yn $script ${destination//"~"/$HOME}/$(basename $script .sh)
 	fi
 done
+
 ## install depreciated scripts 
-ask=0
-while [[ ask -eq 0 ]]; do
+while [[ $depreciated -eq 0 ]]; do
 	printf "install depreciated scripts (default = no) [yes/no/info]? "
 	read yn
 	if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
@@ -164,6 +172,8 @@ while [[ ask -eq 0 ]]; do
 		echo "depreciated scripts have been found redundant, details are provided in the \"info\" for each script"
 	fi
 done
+
 ## end
 echo "done"
 echo "make sure $destination is in your \$PATH and you should be able to call any of these scripts from the terminal"
+
