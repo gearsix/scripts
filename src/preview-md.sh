@@ -1,6 +1,7 @@
 #!/bin/sh
 # preview-md (preview markdown)
-# DESCRIPTION: convert a markdown file $1 to html, optionall open in a browser (if $2 == --open). Set converter in src (cmark by default).
+# DESCRIPTION: convert a markdown file $1 to html, optional open in a browser (if $2 == --open). Set converter in src (cmark by default).
+# dependencies: cmark
 # e.g.$ preview-md README.md --open
 
 mdconv=cmark
