@@ -165,9 +165,9 @@ while [[ $depreciated -eq 0 ]]; do
 		for script in $depreciated_src; do
 			install_yn $script ${destination//"~"/$HOME}/$(basename $script .sh) 1
 		done
-		ask=1
+		depreciated=1
 	elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
-		ask=1
+		depreciated=1
 	elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
 		echo "depreciated scripts have been found redundant, details are provided in the \"info\" for each script"
 	fi
