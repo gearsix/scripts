@@ -4,7 +4,7 @@
 # dependencies: tmux, git, while-true
 
 tmux new-session -d
-tmux split-window -h "while-true 'git --no-pager branch -v'"
+tmux split-window -h "while-true 'git --no-pager branch'"
 tmux split-window -v "while-true 'git status'"
 tmux split-window -h "while-true 'git --no-pager log --graph --abbrev-commit -n 1'"
 tmux select-layout main-vertical
