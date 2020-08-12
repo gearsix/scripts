@@ -4,10 +4,11 @@
 # dependencies: cmark
 # e.g.$ preview-md README.md --open
 
-mdconv=cmark
-out=~/tmp/README.html
+mdconv="cmark --unsafe"
+out=/tmp/README.html
 
-${mdconv} $1 >> $out
+if [ -e $out ]; then rm $out; fi
+$mdconv $1 >> $out
 if [ $? -eq 0 ]; then
 	echo "succesfully converted to $out"
 	if [ ! -z $2 ] && [ $2 = "--open" ] || [ $2 = "-o" ]; then

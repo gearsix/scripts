@@ -46,7 +46,7 @@ install_script () {
 
 	if [[ $ln -eq 0 ]]; then
 		echo "install $src -> $dest"
-		install -pDm754 $src $dest
+		install -pDm755 $src $dest
 	else # ln the file
 		echo "ln -s $src -> $dest"
 		chmod +x $src
