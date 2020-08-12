@@ -4,14 +4,15 @@
 # ARGUMENTS: -g, --global = "git config --global ..."
 
 global=0
-username=$1
-useremail=$2
-shift
-shift
-
 if [[ $1 == "--global" || $1 == "-g" ]]; then
 	global=1
+	shift
 fi
+
+username=$1
+shift
+useremail=$2
+shift
 
 if [[ $global -eq 1 ]]; then
 	git config --global user.name "$username"
