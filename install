@@ -67,7 +67,7 @@ install_yn () {
 			if [[ $all -eq 0 || $depr -eq 1 ]]; then
 				if [[ -e $dest && $reinstall -eq 1 ]]; then
 					yn="y"
-					echo "reinstalling..."
+					printf "\treinstalling...\n"
 				else
 					read yn
 				fi
@@ -78,9 +78,10 @@ install_yn () {
 
 			if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
 				install $src $dest
+				printf "\tinstalled $dest\n"
 				ask=1
 			elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
-				echo "skipping..."
+				echo "\tskipping...\n"
 				ask=1
 			elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
 				grep -i "description\|dependencies\|arguments\|depreciated" $script
