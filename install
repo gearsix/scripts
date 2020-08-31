@@ -81,7 +81,7 @@ install_yn () {
 				printf "\tinstalled $dest\n"
 				ask=1
 			elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
-				echo "\tskipping...\n"
+				printf "\tskipping...\n"
 				ask=1
 			elif [[ $yn == "i" || $yn == "I" || $yn == "info" ]]; then
 				grep -i "description\|dependencies\|arguments\|depreciated" $script
