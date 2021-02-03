@@ -1,7 +1,7 @@
 #!/bin/sh
 # backup
-# description: backup $1 to $1.bak
-# e.g.$ backup ~/.bashrc
+# description: backup $@ to $@.bak
+# e.g.$ backup ~/.bashrc ~/.vimrc
 
-cp $1 $1.bak
+for f in ${@}; do cp $f $f.bak; done
 
