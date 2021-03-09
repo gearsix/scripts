@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 #===========
 # g6scripts
 #===========
@@ -143,7 +144,12 @@ if [[ dir -eq 0 ]]; then
 	printf "install destination (default = $default_destination): "
 	read destination
 	## set to default if empty input
-	if [ -z $destination ]; then destination=$default_destination; fi
+	if [ -z $destination ]; then
+		destination=$default_destination
+	else
+		destination=${destination/"~"/"/home/$USER"}
+		if [[ ! -e $destination ]]; then mkdir -vp $destination; fi
+	fi
 	## check if need root permission to r/w
 	if [ ! -w $destination ]; then echo "$destination: Permission denied"; exit 1; fi
 fi
@@ -158,7 +164,7 @@ for script in $scripts; do
 	fi
 done
 
-## install depreciated scripts 
+## install depreciated scripts
 while [[ $depreciated -eq 0 ]]; do
 	printf "install depreciated scripts (default = no) [yes/no/info]? "
 	read yn
