@@ -1,3 +1,7 @@
+#!/bin/bash
+# DESCRIPTION: build a go pkg for all supported platforms
+# DEPENDENCIES: go
+
 name=$1
 src=$2
 arch=(amd64 386 arm)
