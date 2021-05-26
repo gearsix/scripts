@@ -16,7 +16,8 @@ dir=0
 all=0
 force=0
 verbose=0
-default_destination=/usr/local/bin/	# default install directory
+default_destination=$HOME/.local/bin
+if [[ $USER == "root" ]]; then default_destination=/usr/local/bin/; fi
 source=./src/*.*
 depreciated_src=./src/depreciated/*.*
 scripts=()
