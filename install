@@ -52,7 +52,6 @@ install_script () {
 	else # ln the file
 		echo "ln -s $src -> $dest"
 		chmod +x $src
-		mkdir -p $(dirname $dest)
 		ln -sf $(readlink -f $src) $dest
 	fi
 }
@@ -141,7 +140,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 ## check install destination
-if [[ dir -eq 0 ]]; then
+if [[ $dir -eq 0 ]]; then
 	printf "install destination (default = $default_destination): "
 	read destination
 	## set to default if empty input
@@ -149,11 +148,11 @@ if [[ dir -eq 0 ]]; then
 		destination=$default_destination
 	else
 		destination=${destination/"~"/"/home/$USER"}
-		if [[ ! -e $destination ]]; then mkdir -vp $destination; fi
 	fi
 	## check if need root permission to r/w
 	if [ ! -w $destination ]; then echo "$destination: Permission denied"; exit 1; fi
 fi
+mkdir -p $destination
 
 ## install all $scripts
 if [ ${#scripts[@]} -eq 0 ]; then scripts=$source; fi
