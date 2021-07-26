@@ -5,6 +5,13 @@
 #
 # SEE: https://stackoverflow.com/questions/17368067/length-of-string-in-bash
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+	echo "Usage: strlen STRING"
+	echo ""
+	echo "print the number of characters and bytes for each word in STRING"
+	exit
+fi
+
 strU8DiffLen () { 
     local bytlen oLang=$LANG oLcAll=$LC_ALL
     LANG=C LC_ALL=C
