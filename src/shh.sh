@@ -3,6 +3,13 @@
 # description: run a terminal command ($@) and send stdout to /dev/null
 # e.g.$ shh chromium &
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+	echo "Usage: quiet ARGS"
+	echo ""
+	echo "run all commands in ARGS but send stdout to /dev/null, for when a tool is too noisy"
+	exit
+fi
+
 for bin in $@; do
     $bin &>/dev/null
 done;

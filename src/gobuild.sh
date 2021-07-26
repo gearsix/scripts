@@ -2,6 +2,15 @@
 # DESCRIPTION: build a go pkg for all supported platforms
 # DEPENDENCIES: go
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+	echo "Usage: gobuild SRC..."
+	echo ""
+	echo "build a go binary for every platform"
+	echo "this will set the GOARCH and GOOS variables and run 'go build'"
+	echo "for when you want to build a binary to distribute for as many platforms as possible"
+	exit
+fi
+
 name=$1
 src=$2
 arch=(amd64 386 arm)

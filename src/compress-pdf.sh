@@ -10,6 +10,7 @@ if [ -z $1 ] || [ -z $2 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 	echo "for SETTINGS options, see https://web.mit.edu/ghostscript/www/Ps2pdf.htm#Options"
 	echo "INPUT should provide the filepath of a PDF to compress"
 	echo "OUTPUT should provided the filepath of the compressed PDF (default: ./compressed.pdf)"
+	exit
 fi
 
 in="$1"

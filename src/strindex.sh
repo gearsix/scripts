@@ -5,13 +5,23 @@
 #
 # NOTES: index returned ranges from 0 - (string length)
 
-#swaps argument (strindex "cat on mat" "mat")
-if [[ -z $3 && $3 == "-r" ]]; then
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+	echo "Usage: strindex [OPTIONS] SUBSTRING STRING"
+	echo ""
+	echo "print the starting index of SUBSTRING in STRING"
+	echo "-1 will be printed if SUBSTRING could not be found"
+	echo ""
+	echo "OPTIONS (must be provided before SUBSTRING STRING)"
+	echo "  -r      reverse provided SUBSTRING and STRING order"
+	exit
+fi
+
+if [[ "$1" == "-r" ]]; then # swap arguments (e.g. strindex "cat on mat" "mat")
+	shift
     x="${1%%$2*}"
-    [[ "$x" = "$1" ]] && echo "ERROR! strindex(): Could not find $2 in $1" || echo "${#x}"
-#standard usage (see e.g.$)
-else
+    [[ "$x" = "$1" ]] && echo "-1" || echo "${#x}"
+else #standard usage (see e.g.$)
     x="${2%%$1*}"
-    [[ "$x" = "$2" ]] && echo "ERROR! strindex(): could not find $1 in $2"  || echo "${#x}"
+    [[ "$x" = "$2" ]] && echo "-1"  || echo "${#x}"
 fi
 

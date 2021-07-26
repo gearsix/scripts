@@ -9,6 +9,7 @@ if [ -z $1 ] || [ -z $2 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 	echo ""
 	echo "copy the contents of the file INPUT to file OUTPUT"
 	echo "WARNING: this will overwrite existing contents in file OUTPUT"
+	exit
 fi
 
 touch $2
