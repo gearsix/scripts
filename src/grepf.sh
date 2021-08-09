@@ -4,7 +4,7 @@
 # dependencies: grep
 # e.g.$ grepf dogs/ "shades"
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: grepf DIRECTORY EXPRESSION"
 	echo ""
 	echo "call grep EXPRESSION on all files in DIRECTORY"
