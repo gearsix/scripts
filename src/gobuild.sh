@@ -2,7 +2,7 @@
 # DESCRIPTION: build a go pkg for all supported platforms
 # DEPENDENCIES: go
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: gobuild SRC..."
 	echo ""
 	echo "build a go binary for every platform"
@@ -18,8 +18,8 @@ os=(linux windows darwin dragonfly openbsd netbsd freebsd)
 
 for a in ${arch[@]}; do
 	for o in ${os[@]}; do
-		if [[ $a == "arm" || $a == "386" ]]; then
-			if [[ $o == "darwin" || $o == "dragonfly" ]]; then
+		if [[ $a = "arm" || $a = "386" ]]; then
+			if [[ $o = "darwin" || $o = "dragonfly" ]]; then
 				continue
 			fi
 		fi

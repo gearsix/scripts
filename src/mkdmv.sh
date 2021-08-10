@@ -3,7 +3,7 @@
 # description: mkdir $1 && mv ($2...$n) 1to it
 # e.g.$ mkdmv ~/new-dir ~/var/tmp/file*
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: mkdmv DIRECTORY FILEPATH..."
 	echo ""
 	echo "mkdir DIRECTORY and mv all listed FILEPATH... files into it"

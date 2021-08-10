@@ -4,7 +4,7 @@
 # ARGUMENTS: $1 = input file, [$2 = output file (default: compressed.pdf)]
 # e.g.$: compress-pdf my-pdf.pdf my-pdf-compressed.pdf
 
-if [ -z $1 ] || [ -z $2 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ -z $1 ] || [ -z $2 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: compress-pdf [SETTINGS] INPUT [OUTPUT]"
 	echo ""
 	echo "for SETTINGS options, see https://web.mit.edu/ghostscript/www/Ps2pdf.htm#Options"

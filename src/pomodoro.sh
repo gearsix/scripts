@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo "pomdoro"
     echo "usage: pomodoro [OPTIONS]"
     echo ""
@@ -11,15 +11,20 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
     exit
 fi
 
-NOTIFY=$NOTIFY
+NAME="pomodoro"
 WORK=25m
 BREAK=5m
-if [ "$1" == "--long" ]; then  BREAK=15m; fi
+if [ "$1" = "--long" ]; then  BREAK=15m; fi
 
-notify-send -t $NOTIFY -a pomodoro "Begin" "Work for 25m. Break for $BREAK.\nRepeat."
+notify-send -a pomodoro "Begin" "Work for 25m. Break for $BREAK.\nRepeat."
 if [ -s $? ]; then echo "notify-send failed, aborting"; fi
 
 while [ true ]; do
-    sleep "$WORK" && notify-send -t $NOTIFY -a pomodoro "Take a break" "You've been working for $WORK, time for a $BREAK break."
-    sleep "$BREAK" && notify-send -t $NOTIFY -a pomodoro "Back to work" "$BREAK break is over, back to being busy for 25m."
+	msg="You've been working for $WORK, time for a $BREAK break."
+    sleep "$WORK" && notify-send -a $NAME "Take a break" $msg
+	echo "$msg"
+
+	msg="$BREAK break is over, back to being busy for 25m."
+    sleep "$BREAK" && notify-send -a $NAME "Back to work" $msg
+	echo "$msg"
 done
