@@ -16,7 +16,7 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 fi
 
 mdconv="cmark"
-out=$(echo "$1" | sed "s/md/html/")
+out=$(echo "$1" | sed "s/\.\?\(md\|txt\|$\)/\.html/")
 
 if [ -e "$out" ]; then rm -i $out; fi
 $mdconv "$1" > "$out"
