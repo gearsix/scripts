@@ -17,7 +17,7 @@ shift;
 
 #cp files into $1
 for file in $@; do
-    cp $file $dir;
+    cp -r $file $dir;
     shift;
 done
 
