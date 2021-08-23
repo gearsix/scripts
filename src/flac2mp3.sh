@@ -4,7 +4,7 @@
 # e.g.$ flac2mp3 ./album
 # DEPENDENCIES: ffmpeg
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: flac2mp3 DIRECTORY"
 	echo ""
 	echo "use ffmpeg to convert a directory of .flac files to .mp3 files"

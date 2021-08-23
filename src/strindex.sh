@@ -5,7 +5,7 @@
 #
 # NOTES: index returned ranges from 0 - (string length)
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: strindex [OPTIONS] SUBSTRING STRING"
 	echo ""
 	echo "print the starting index of SUBSTRING in STRING"
@@ -16,7 +16,7 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 	exit
 fi
 
-if [[ "$1" == "-r" ]]; then # swap arguments (e.g. strindex "cat on mat" "mat")
+if [[ "$1" = "-r" ]]; then # swap arguments (e.g. strindex "cat on mat" "mat")
 	shift
     x="${1%%$2*}"
     [[ "$x" = "$1" ]] && echo "-1" || echo "${#x}"

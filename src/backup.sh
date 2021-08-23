@@ -3,7 +3,7 @@
 # description: cp $@ -> $@.bak
 # e.g.$ backup ~/.bashrc ~/.vimrc
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: 'backup [OPTIONS] FILEPATHS...'"
 	echo ""
 	echo "copy all listed files (in FILEPATHS...) to \$filename.bak"
@@ -14,7 +14,7 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 fi
 
 backup=cp
-if [ "$1" == "-r" ]; then backup=mv; fi
+if [ "$1" = "-r" ]; then backup=mv; fi
 
 for f in ${@}; do $backup $f $f.bak; done
 

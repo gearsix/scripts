@@ -3,7 +3,7 @@
 # description: clear terminal, run $1, sleep ($2 || 1), repeat (Ctrl+C to cancel)
 # e.g.$ while-true "git status" 5
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: while-true \"ACTION\" [SLEEP]"
 	echo ""
 	echo "while-true will loop infinitely and repeat ACTION every [SLEEP] seconds."

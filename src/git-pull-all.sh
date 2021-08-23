@@ -3,7 +3,7 @@
 # description: pull all remote branches to the local repo
 
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	echo "Usage: git-pull-all"
 	echo ""
 	echo "pull all remote branches of repo in callers working directory to local"
