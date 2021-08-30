@@ -40,10 +40,12 @@ Scripts related to string parsing/manipulation
 
 - **strlen** - prints the length of passed strings ($')
 - **strindex** - prints the index (starting from 0) of the first character in substring ($1)
-- **gfind** - find all files in dir ($1), that conatin string ($2) - SUPER useful for debugging somebody else's code
+- **grepf** - find all files in dir ($1), that conatin string ($2) - SUPER useful for debugging somebody else's code
+- **randstr** - generate a random string
 
 ### file management
 
+- **backup** cp input files ($1..$n) from `filename` to `filename.bak`
 - **shh** - runs binaries ($1..$n) and send stdout to /dev/null (this probably needs a rename)
 - **flac2mp3** - converts .flac files ($1..$n) to .mp3 files
 - **cpc** - copy the contents of file $1 into file $2 **WARNING: will overwrite contents of file $2**
@@ -54,14 +56,23 @@ Scripts related to string parsing/manipulation
 - **mkdcp** - make directory ($1) and copy files into it ($2..$n)
 - **mkdmv** - make directory ($1) and move files into it ($2..$n)
 - **mkdnvim** - make directory ($1), touch file ($2) and open file ($2) in nvim
+- **mkdtouch** - make a directory ($1), touch files in it ($2..$n)
 
 ### tooling
 
 - **git-cfg** - shorthand for setting git config --local user.name ($1) && git config --local user.email ($2)
   - You can also use it for setting global config, just add _-g_ or _--global_ at $3
+- **git-clone-bulk** - clone a list of git repositories
+- **git-pull-all** - pull all remote branches from the current upstream
+- **gobuild** - build a go module in all available output formats, useful for releases
+- **preview-md** - preview a markdown file ($1) by converting it to a html file, requires cmark
+- **compress-pdf** - compress a .pdf file ($1), requires _ghostscript_ (_gs_)
 
 ### misc
 
+- **xbright** - set the screen brightness using _xrandr_
+- **shush** - echo outpout of $@ to null
+- **pomodoro** - a [pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) timer.
 - **while-true** - clear the terminal, run $1 sleep ($2 || 1), repeat forever (Ctrl+C to cancel)
 - **preview-md** - convert a markdown file ($1) to html, open if $2 == "-o" or "--open". Uses cmark by default, set conversion tool and default output destination in src.
 
@@ -71,5 +82,6 @@ Scripts related to string parsing/manipulation
   - I found out you could just use "touch ./file{0...n}"
 
 # Authors
+
 - GeaRSiX
 
