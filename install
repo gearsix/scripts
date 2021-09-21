@@ -149,6 +149,8 @@ if [[ $dir -eq 0 ]]; then
 	else
 		destination=${destination/"~"/"/home/$USER"}
 	fi
+	## check exists
+	if [ ! -e $destination ]; then mkdir -p "$destination"; fi
 	## check if need root permission to r/w
 	if [ ! -w $destination ]; then echo "$destination: Permission denied"; exit 1; fi
 fi
