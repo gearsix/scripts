@@ -46,6 +46,7 @@ Scripts related to string parsing/manipulation
 ### file management
 
 - **backup** cp input files ($1..$n) from `filename` to `filename.bak`
+- **catrm** `rm -i` but with the option to cat the file
 - **shh** - runs binaries ($1..$n) and send stdout to /dev/null (this probably needs a rename)
 - **flac2mp3** - converts .flac files ($1..$n) to .mp3 files
 - **cpc** - copy the contents of file $1 into file $2 **WARNING: will overwrite contents of file $2**
