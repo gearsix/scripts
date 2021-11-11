@@ -1,3 +1,5 @@
+# DEPRECIATED: just use (str="string") "echo ${#str}" or "wc -c $str", etc
+
 #!/bin/sh
 # strlen (string length)
 # description: echo's the length of a string ($1)

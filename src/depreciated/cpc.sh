@@ -1,3 +1,5 @@
+# DEPRECIATED: not sure why this existed (could just cp?)
+
 #!/bin/sh
 # cpc (cp contents)
 # description: copies the contents of file $1 to file $2
