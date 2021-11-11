@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# cat & remove
+# description: cat $@ and prompt to rm
 
 ync=
 for f in $@; do
