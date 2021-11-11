@@ -1,3 +1,5 @@
+# DEPRECIATED: just made an alias in bashrc (alias xopen='xdg-open')
+
 #!/bin/sh
 # xopen = xdg-open FILE
 # description: open file in xserver (doesn't support multiple files at once yet)
