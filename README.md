@@ -65,7 +65,7 @@ Useful for debugging somebody else's code in a terminal.
 - *backup* - cp input files $@ from `filename` to `filename.bak` (mv with `-m`)
 - *catrm* `rm -i` but with the option to cat the file
 - *flac2mp3* - converts .flac files $@ to .mp3. Requires ffmpeg.
-- *openurl* - open a .url file $1 (see http://www.danielbrice.net/blog/opening-url-file-like-a-pro/)
+- *openurl* - xdg-open all links found in files $@
 - *mkdcp* - make directory $1 and copy files into it ($2..$n)
 - *mkdmv* - make directory $1 and move files into it ($2..$n)
 - *mkdnvim* - make directory $1, touch file $2 and open file $2 in nvim
