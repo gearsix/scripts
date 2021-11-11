@@ -1,88 +1,99 @@
 # g6scripts
+
 A collection of personal scripts I use in linux environments
 
+
 ## contents
+
 1. [overview](#overview)
 2. [installing](#installing)
 3. [uninstall](#uninstall)
 4. [notes](#notes)
 5. [scripts](#scripts)
 
-## overview
-I use most of these scripts for convenience and to save on typing. I've probably got a few more coming that are currently sitting in my .bashrc
 
-If any of them are do-able with a simple single-line of Bash, please let me know!
+## overview
+
+I use most of these scripts for convenience and to save on typing.
+
 
 ## installing
-I've created an install script (_another_ bash script) to help with selecting the scripts you want to install.
 
-	usage: ./install [ARGUMENTS]
+I've created an install script (bash) to help with selecting the scripts you want to install.
+
+	usage: ./install [ARGUMENTS] [SCRIPT]
+
+	SCRIPTS
+	  Optionally, you can specify a script to install.
+	  Any specified scripts must be the filepath to the
+	  script (not just the filename).
 
 	ARGUMENTS
-	-d, --dest [DESTINATION]    pre-define the destination to install the scripts to
-	-a, --all                   install ALL the scripts, will answer "y" automatically
-	-l, --link                  will "ln -s" the script (not copy it), note if location of source changes then links will break
-	-h, --help                  print this dialog
+	  -f, --force         overwrites files when installing
+	  -r,   --reinstall   re-install scripts already existing in
+			      destination directory
+	  -d, --dest [DEST]   set the install destination
+	  -a, --all           install ALL the scripts ('y' to all prompts)
+	  -l, --link          'ln' the script (not cp).
+	  -h, --help          print this dialog
+
 
 ## uninstalling
-I'm planning to add an uninstall bash script too, currently you'll have to manually delete all the files added though.
+
+I'm planning to add an uninstall bash script too, currently you'll have to manually delete all the files added for now though.
+
 
 ## notes
-I personally find `gfind` and `while-true` the most useful.
 
-Personally, I like to `mkdir` a ~/bin folder (make sure ~/bin is in $PATH) and ln -s for all the scripts I wanna use (e.g. below):
+I've added `-h` options to all the scripts.
 
-	./install --link --dest ~/bin
+Personally find `grepf` and `while-true` to by the most frequently used.
 
 ## scripts
-### strings
+
+**strings**
+
 Scripts related to string parsing/manipulation
 
-- **strlen** - prints the length of passed strings ($')
-- **strindex** - prints the index (starting from 0) of the first character in substring ($1)
-- **grepf** - find all files in dir ($1), that conatin string ($2) - SUPER useful for debugging somebody else's code
-- **randstr** - generate a random string
+- *strindex* - print the index (starting from 0) of the first character in substring $1 found in string $2
+- *grepf* - find all files in dir $1, that conatin string $2.
+Useful for debugging somebody else's code in a terminal.
+- *randstr* - generate a random string
 
-### file management
+**file management**
 
-- **backup** cp input files ($1..$n) from `filename` to `filename.bak`
-- **catrm** `rm -i` but with the option to cat the file
-- **shh** - runs binaries ($1..$n) and send stdout to /dev/null (this probably needs a rename)
-- **flac2mp3** - converts .flac files ($1..$n) to .mp3 files
-- **cpc** - copy the contents of file $1 into file $2 **WARNING: will overwrite contents of file $2**
-- **xopen** - open files ($@) in their xdg-default
-  - _-q_ _--quiet_ - sends the output of $@ to /dev/null
-- **openurl** - open a .url file ($1) (see http://www.danielbrice.net/blog/opening-url-file-like-a-pro/)
-  - I never use this one directly myself, instead I set it as the default binary for .url files in ~/.config/mimeapps.list and use xopen
-- **mkdcp** - make directory ($1) and copy files into it ($2..$n)
-- **mkdmv** - make directory ($1) and move files into it ($2..$n)
-- **mkdnvim** - make directory ($1), touch file ($2) and open file ($2) in nvim
-- **mkdtouch** - make a directory ($1), touch files in it ($2..$n)
+- *backup* - cp input files $@ from `filename` to `filename.bak` (mv with `-m`)
+- *catrm* `rm -i` but with the option to cat the file
+- *flac2mp3* - converts .flac files $@ to .mp3. Requires ffmpeg.
+- *openurl* - open a .url file $1 (see http://www.danielbrice.net/blog/opening-url-file-like-a-pro/)
+- *mkdcp* - make directory $1 and copy files into it ($2..$n)
+- *mkdmv* - make directory $1 and move files into it ($2..$n)
+- *mkdnvim* - make directory $1, touch file $2 and open file $2 in nvim
+- *mkdtouch* - make a directory $1, touch files in it ($2..$n)
 
-### tooling
+**tooling**
 
-- **git-cfg** - shorthand for setting git config --local user.name ($1) && git config --local user.email ($2)
-  - You can also use it for setting global config, just add _-g_ or _--global_ at $3
-- **git-clone-bulk** - clone a list of git repositories
-- **git-pull-all** - pull all remote branches from the current upstream
-- **gobuild** - build a go module in all available output formats, useful for releases
-- **preview-md** - preview a markdown file ($1) by converting it to a html file, requires cmark
-- **compress-pdf** - compress a .pdf file ($1), requires _ghostscript_ (_gs_)
+- *git-cfg* - shorthand for setting git config --local user.name $1 && git config --local user.email $2
+  - You can also use it for setting global config using `-g`
+- *git-clone-bulk* - clone a list of git repositories
+- *git-pull-all* - pull all remote branches from the current upstream
+- *gobuild* - build a go module in all available output formats, useful for releases
+- *preview-md* - convert a markdown file $1 to html, open if $2 == "-o" or "--open". Uses cmark by default, set conversion tool and default output destination in src.
+- *compress-pdf* - compress a .pdf file $1, requires _ghostscript_ (_gs_)
 
-### misc
+**misc**
 
-- **xbright** - set the screen brightness using _xrandr_
-- **shush** - echo outpout of $@ to null
-- **pomodoro** - a [pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) timer.
-- **while-true** - clear the terminal, run $1 sleep ($2 || 1), repeat forever (Ctrl+C to cancel)
-- **preview-md** - convert a markdown file ($1) to html, open if $2 == "-o" or "--open". Uses cmark by default, set conversion tool and default output destination in src.
+- *xbright* - set the screen brightness using _xrandr_
+- *shush* - echo output of $@ to null
+- *pomodoro* - a [pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) timer.
+- *while-true* - clear the terminal, run $1 sleep ($2 || 1 sec), repeat forever (Ctrl+C to cancel)
 
-### depreciated
+**depreciated**
 
-- **touchn** - create $2 files name $1 appended with 1 to $2
-  - I found out you could just use "touch ./file{0...n}"
+This contains scripts that I once used but eventually realised were useless.
 
-# Authors
 
-- GeaRSiX
+## authors
+
+- gearsix
 
