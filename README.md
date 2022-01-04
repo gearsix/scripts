@@ -1,6 +1,6 @@
 # g6scripts
 
-A collection of personal scripts I use in linux environments
+A collection of personal scripts I use.
 
 
 ## contents
@@ -15,6 +15,8 @@ A collection of personal scripts I use in linux environments
 ## overview
 
 I use most of these scripts for convenience and to save on typing.
+
+More recently I've been making an effort to learn PowerShell as I tend to use windows a fair bit too, so there are a few one-off scripts used for that too.
 
 
 ## installing
