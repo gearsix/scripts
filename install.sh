@@ -18,7 +18,7 @@ force=0
 verbose=0
 default_destination=$HOME/.local/bin
 if [[ $USER == "root" ]]; then default_destination=/usr/local/bin/; fi
-source=./src/*.*
+source=./nix/*.*
 depreciated_src=./src/depreciated/*.*
 scripts=()
 depreciated=0
