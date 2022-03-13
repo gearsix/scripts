@@ -48,13 +48,17 @@ install_script () {
 	src=$1
 	dest=$2
 
+	cmd=
 	if [[ $ln -eq 0 ]]; then
-		echo "install $src -> $dest"
-		install -pDm755 $src $dest
+		cmd=$(install -vpDm755 $src $dest)
 	else # ln the file
-		echo "ln -s $src -> $dest"
-		chmod +x $src
-		ln -sf $(readlink -f $src) $dest
+		cmd=$(chmod +x $src && echo ""; ln -vsf $(readlink -f $src) $dest)
+	fi
+
+	if [[ ! $cmd ]]; then
+		echo "something went wrong"; exit 1;
+	else
+		echo $cmd
 	fi
 }
 ## install_yn = installs $1 to $2, prints $3 if user asks for "info"
@@ -80,8 +84,7 @@ install_yn () {
 			fi
 
 			if [[ $yn == "y" || $yn == "Y" || $yn == "yes" ]]; then
-				install $src $dest
-				printf "\tinstalled $dest\n"
+				install_script $src $dest
 				ask=1
 			elif [[ $yn == "n" || $yn == "N" || $yn == "no" ]]; then
 				printf "\tskipping...\n"
