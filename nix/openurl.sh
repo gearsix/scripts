@@ -5,6 +5,6 @@
 
 for f in $@; do
 	for url in "$(grep -o -E 'https?://[^"]+' $f)"; do
-		xdg-open "$ur3l";
+		xdg-open "$url";
 	done
 done
