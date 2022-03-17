@@ -50,7 +50,7 @@ install_script () {
 
 	cmd=
 	if [[ $ln -eq 0 ]]; then
-		cmd=$(install -vpDm755 $src $dest)
+		cmd=$(install -vp $src $dest)
 	else # ln the file
 		cmd=$(chmod +x $src && echo ""; ln -vsf $(readlink -f $src) $dest)
 	fi
