@@ -75,6 +75,7 @@ Useful for debugging somebody else's code in a terminal.
 
 **tooling**
 
+- *pyserve* - shorthand for `python3 -m http.server --directory $1`
 - *git-cfg* - shorthand for setting git config --local user.name $1 && git config --local user.email $2
   - You can also use it for setting global config using `-g`
 - *git-clone-bulk* - clone a list of git repositories
@@ -85,7 +86,6 @@ Useful for debugging somebody else's code in a terminal.
 
 **misc**
 
-- *xbright* - set the screen brightness using _xrandr_
 - *shush* - echo output of $@ to null
 - *pomodoro* - a [pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) timer.
 - *while-true* - clear the terminal, run $1 sleep ($2 || 1 sec), repeat forever (Ctrl+C to cancel)
