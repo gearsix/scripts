@@ -3,7 +3,7 @@
 # description: set git config user.name ($1) & user.email ($2) in current dir, defaults to using --local
 # ARGUMENTS: -g, --global = "git config --global ..." | -h, --help = prints help
 
-if [ $1 = "--help" ] || [ $1 = "-h" ]; then
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
 	echo "Usage: git-cfg [ARGUMENTS] [NAME] [EMAIL]"
 	echo ""
 	echo "shorthand script to set the user.name and user.email values in a git"
