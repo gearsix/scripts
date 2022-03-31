@@ -10,7 +10,7 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	exit
 fi
 
-mkdir $1;
+mkdir -p $1;
 cd $1;
-touch $2;
+if [ $2 ]; then touch $2; fi
 $EDITOR $2;
