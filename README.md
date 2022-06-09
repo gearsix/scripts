@@ -19,7 +19,7 @@ I use most of these scripts for convenience and to save on typing.
 More recently I've been making an effort to learn PowerShell as I tend to use windows a fair bit too, so there are a few one-off scripts used for that too.
 
 
-## installing
+## installing (unix only)
 
 I've created an install script (bash) to help with selecting the scripts you want to install.
 
@@ -51,9 +51,16 @@ I've added `-h` options to all the scripts.
 
 Personally find `grepf` and `while-true` to by the most frequently used.
 
-## scripts
+## windows (powershell) scripts
 
-**strings**
+- **random** - a script I use to select a random item in a directory.
+- **zip27z** - converts all .zip files in current directory to .7z
+
+## unix (shell) scripts
+
+Some are bash-only, I make an effort to keep to **sh** when I can though - for compatibility across unix(-like)s.
+
+**strings & numbers**
 
 Scripts related to string parsing/manipulation
 
@@ -61,6 +68,7 @@ Scripts related to string parsing/manipulation
 - *grepf* - find all files in dir $1, that conatin string $2.
 Useful for debugging somebody else's code in a terminal.
 - *randstr* - generate a random string
+- *d2h* - convert decimal numbers to hexadecimal
 
 **file management**
 
