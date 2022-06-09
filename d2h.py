@@ -6,7 +6,7 @@ while (True):
     d = input('> ')
     if d.isdigit():
         print(hex(int(d)))
-    elif d == 'q' or d == 'quit or ' d == 'exit':
+    elif d == 'q' or d == 'quit' or d == 'exit':
         exit()
     else:
         print(d, 'is not a number')
