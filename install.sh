@@ -189,5 +189,3 @@ done
 
 ## end
 echo "done"
-echo "make sure $destination is in your \$PATH and you should be able to call any of these scripts from the terminal"
-
